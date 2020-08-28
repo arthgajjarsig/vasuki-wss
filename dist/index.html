@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>Vasuki : Web Sockets Server</title>
+</head>
+
+<body>
+  <p id="device-info">Device Info: Count till 10...</p>
+  <button onclick="sendMessage()">Send Data</button>
+  <script>
+    const HOST = location.origin.replace(/^http/, "ws");
+    const ws = new WebSocket(HOST);
+    let el;
+
+    ws.onmessage = (event) => {
+      el = document.getElementById("device-info");
+      el.innerHTML = "Device Info: " + event.data;
+
+    };
+
+    const sendMessage = () => {
+      ws.send(JSON.stringify({error: false}));
+    };
+  </script>
+</body>
+
+</html>
